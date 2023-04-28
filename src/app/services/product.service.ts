@@ -15,10 +15,10 @@ private categoryUrl:string;
 private searchUrl:string;
 private productUrl:string;
   constructor(private http:HttpClient) {
-    this.baseUrl = "http://localhost:8080/api/product"
-    this.categoryUrl="http://localhost:8080/api/category/categories";
-    this.searchUrl="http://localhost:8080/api/product/search";
-    this.productUrl="http://localhost:8080/api/product/products";
+    this.baseUrl = "http://localhost:9194/api/v1/product"
+    this.categoryUrl="http://localhost:9194/api/v1/product/category/categories";
+    this.searchUrl="http://localhost9194/api/v1/product/search";
+    this.productUrl="http://localhost:9194/api/v1/product/products";
 
   }
   getProductListPaginate(thePageNumber:number,thePageSize:number,currentCategoryId:number):Observable<ProductPage>{
