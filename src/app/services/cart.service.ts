@@ -9,9 +9,21 @@ export class CartService {
   cartItems: CartItem[] = [];
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
-   
-  constructor() { }
- 
+   storage:Storage = localStorage;
+   persistCartItems(){
+    this.storage.setItem('cartItems',JSON.stringify(this.cartItems));
+   }
+  constructor() { 
+  let  data = JSON.parse(this.storage.getItem('cartItems') as any);
+  if(data != null){
+  this.cartItems = data;
+  this.computeCartTotals();
+  }
+
+  }
+  
+
+
   addToCart(theCartItem: CartItem) {
     //check if we Already have the item in our cart
     let alreadyExistsInCart: boolean = false;
@@ -20,7 +32,7 @@ export class CartService {
    
       for (let tempCartItem of this.cartItems) {
    
-        if (tempCartItem.id === theCartItem.id) {
+        if (tempCartItem.productId === theCartItem.productId) {
           existingCartItem = tempCartItem
           break;
         }
@@ -58,6 +70,7 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
     console.log(this.totalQuantity);
     this.logCartData(totalPriceValue,totalQuantityValue);
+    this.persistCartItems();
   }
  
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
@@ -71,7 +84,7 @@ export class CartService {
       if ((tempCartItem.quantity) && (tempCartItem.unitPrice) !=undefined)
         subTotalPrice += tempCartItem.quantity * tempCartItem.unitPrice
         
-      console.log(`name: ${tempCartItem.name} quantity = ${tempCartItem.quantity}
+      console.log(`name: ${tempCartItem.productName} quantity = ${tempCartItem.quantity}
    ,unitPrice= ${tempCartItem.unitPrice} totalPrice = ${subTotalPrice} `);
  
     }
@@ -93,7 +106,7 @@ export class CartService {
   }
   remove(theCartItem:CartItem){
    // get index of item in the array
-   const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.id === theCartItem.id );
+   const itemIndex = this.cartItems.findIndex( tempCartItem => tempCartItem.productId === theCartItem.productId );
 // if found, remove the item from the array at the given index
    if (itemIndex > -1) {
      this.cartItems.splice(itemIndex, 1);
