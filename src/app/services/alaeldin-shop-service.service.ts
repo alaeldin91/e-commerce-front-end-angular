@@ -8,8 +8,8 @@ import { State } from '../common/state';
   providedIn: 'root'
 })
 export class AlaeldinShopServiceService {
-  private stateUrl:string ="http://localhost:8081/api/country/state";
-  private countryUrl ="http://localhost:8081/api/country/counteries";
+  private stateUrl:string ="http://localhost:9194/api/v1/country/state";
+  private countryUrl ="http://localhost:9194/api/v1/country/counteries";
   constructor(private httpClient:HttpClient) { }
    getCounteries():Observable<Country[]>{
   return this.httpClient.get<Country[]>(this.countryUrl);
