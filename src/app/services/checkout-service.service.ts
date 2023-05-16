@@ -10,7 +10,7 @@ export class CheckoutServiceService {
 private purchesUrl:string;
  //private purchesUrl="http://localhost:9194/api/v1/order/placeOrder";
   constructor(private httpClient:HttpClient) { 
-    this.purchesUrl="http://localhost:8087/api/v1/order/placeOrder";
+    this.purchesUrl="http://localhost:9194/api/v1/order/placeOrder";
   }
 
   placeOrder(purches:Purches):Observable<any>{

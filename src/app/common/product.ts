@@ -45,22 +45,4 @@ export interface Pageable {
         numberOfElements: number;
         empty: boolean;
       }
-      export interface ProductPage {
-        content: Product[];
-        pageable: Pageable;
-        last: boolean;
-        totalElements: number;
-        totalPages: number;
-        size: number;
-        number: number;
-        sort: {
-          empty: boolean;
-          sorted: boolean;
-          unsorted: boolean;
-        };
-        first: boolean;
-        numberOfElements: number;
-        empty: boolean;
-      }
-      
-      
+     
